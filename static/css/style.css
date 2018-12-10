@@ -90,6 +90,25 @@ form{
 .shop{
 	margin-top: 20px;height: 251px;
 }
+#shopx{
+	position: relative;
+}
+#shopx .gname{
+	font-size: 12px;
+
+}
+#shopx .price{
+	font-size: 15px;
+	color: red;
+	position: absolute;
+	bottom: 12px;
+}
+#shopx .cost{
+	font-size: 10px;
+	color: gray;
+	position: absolute;
+	bottom: 1px;
+}
 #list2{
 	position: absolute;top:113px;height: 35px;background-color: #f5f5f5;width: 100%;padding-left: 190px;left: 0;box-sizing: border-box;
 }

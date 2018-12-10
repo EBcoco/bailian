@@ -2,6 +2,10 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
-def index(request):
+from app.models import Goods
 
-    return render(request, 'index.html')
+
+def index(request):
+    goods=Goods.objects.all()
+
+    return render(request, 'index.html',context={'goods':goods})
