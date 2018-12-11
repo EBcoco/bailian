@@ -93,7 +93,7 @@
             <li><a href="">消息</a></li>
         </ul>
         <ul class="right-top">
-            <li><a href="html/login.html" class="iconfont"> 请登录</a>&nbsp;&nbsp;<a href="html/register.html">注册</a></li>
+            <li><a href="html/login.html" class="iconfont"> 请登录</a>&nbsp;&nbsp;<a href="{% url 'bl:register' %}">注册</a></li>
             <li><a href="car.html">我的订单</a></li>
             <li><a href="">我的百联</a></li>
             <li><a href="">充值缴费</a></li>
@@ -1718,8 +1718,8 @@
         <ul id="shopx">
             {% for good in goods %}
                 <li>
-                    <img src="static/{{ good.img }}" alt="">
-                    <a class="gname" href="">{{ good.name }}</a>
+                    <img src="/static/{{ good.img }}" alt="">
+                    <a class="gname" href="{% url 'bl:shop' good.id %}">{{ good.name }}</a>
                     <p class="price">{{ good.init }}{{ good.price }}</p>
                     <p class="cost">参考价:{{ good.init }}{{ good.cost }}</p>
                 </li>

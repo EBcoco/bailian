@@ -1,0 +1,375 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>商品详情</title>
+    <link rel="stylesheet" href="{% static 'css/shop.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}" type="text/css"/>
+    <script src="{% static 'js/jquery-1.12.3.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.cookie.js' %}"></script>
+    <script src="{% static 'js/shop.js' %}"></script>
+{#    <script src="{% static 'js/coco.js' %}"></script>#}
+</head>
+<body>
+
+<!--商品页重做- 多div包裹写法-->
+<div id="top">
+    <div class="main">
+        <ul id="ul1">
+            <li id="top1"><a target="_blank">百联集团666</a></li>
+            <li id="top2"><a href="" target="_blank">网站导航</a></li>
+            <li id="top3"><a href="" target="_blank">消息</a></li>
+        </ul>
+        <ul id="ul2">
+            <li><a href="html/login.html" target="_blank">登录</a><a href="html/register.html" target="_blank">注册</a></li>
+            <li><a href="" target="_blank">我的订单</a></li>
+            <li><a href="" target="_blank">我的百联</a></li>
+            <li><a href="" target="_blank">充值缴费</a></li>
+            <li><a href="" target="_blank">客户服务</a></li>
+            <li><a href="" target="_blank">掌上百联</a></li>
+            <li><a href="car.html" target="_blank">购物车</a></li>
+        </ul>
+    </div>
+</div>
+
+<!--banner logo 部分-->
+<div style="height: 78px;padding-bottom: 18px;">
+    <div class="main">
+        <div id="logo">
+            <div>
+                <a href="index.html" target="_blank"><img src="{% static 'images/banner.jpg' %}"></a>
+            </div>
+            <div>
+                <img src="{% static 'images/342870273.jpg' %}">
+            </div>
+        </div>
+        <div id="so">
+            <div id="Inpt">
+                <input type="text" placeholder="10Q币只卖9.9！马化腾：‘亏死了’"><input type="submit" value="" class="">
+            </div>
+            <div id="first-a">
+                <a href="" target="_blank">iPhone</a>
+                <a href="" target="_blank">耐克</a>
+                <a href="" target="_blank">大王</a>
+                <a href="" target="_blank">欧舒丹</a>
+                <a href="" target="_blank">手表</a>
+                <a href="" target="_blank">良品铺子</a>
+                <a href="" target="_blank">卫生纸</a>
+                <a href="" target="_blank">沐浴露</a>
+                <a href="" target="_blank">大米</a>
+                <a href="" style="border:none !important" target="_blank">大王天使</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--这里是黑色的列表-->
+<div id="black">
+    <div class="main">
+        <div id="txt">
+            <a target="_blank">商品详情 </a>
+        </div>
+        <ul>
+            <li><a href="" target="_blank">首页</a></li>
+            <li><a href="" target="_blank">生活日用</a></li>
+            <li><a href="" target="_blank">24H百货</a></li>
+            <li><a href="" target="_blank">全球购</a></li>
+            <li><a href="" target="_blank">精品闪购</a></li>
+            <li><a href="" target="_blank">电器城</a></li>
+            <li><a href="" target="_blank">奥莱代购</a></li>
+            <li><a href="" target="_blank">礼品卡</a></li>
+        </ul>
+    </div>
+</div>
+
+<div style="height: 650px;">
+    <div class="main">
+        <div>
+            <div>
+                <p></p>
+                <!--这里是json 来的产品路径归属-->
+            </div>
+            <div>
+{#                <img src="{% static '' %}">#}
+                <!--这里是json 来的产品品牌信息图-->
+            </div>
+        </div>
+        <!--楼上应该有个下边框-->
+    </div>
+    <div class="main">
+        <!--这里是左边的切换图-->
+        <div id="left">
+            <div id="smallImg">
+                <img src="/static/{{ img1 }}" width="448" height="448" alt="">
+                <div id="smallArea" style="width: 334.507px; height: 334.507px;"></div>
+            </div>
+            <div id="bigArea" style="">
+                <img id="bigImg" src="/static/{{ img1 }}" width="600" height="600" alt="">
+            </div>
+            <div id="four">
+                <!--这里是4个商品小图-->
+                <div id="img1"><img src="/static/{{ img1 }}" alt=""></div>
+                <div id="img2"><img src="/static/{{ img2 }}" alt=""></div>
+                <div id="img3"><img src="/static/{{ img3 }}" alt=""></div>
+                <div id="img4"><img src="/static/{{ img4 }}" alt=""></div>
+            </div>
+        </div>
+        <!--这里是右边的商品详情-->
+        <div style="width: 710px;float: left;margin-left: 10px;">
+            <div class="namebox">
+                <!--获取商品name-->
+                <p>{{ name }}</p>
+            </div>
+            <div id="bebox">
+                <div id="redbox">
+                    <a target="_blank">超值团</a>
+                    <a target="_blank">距离活动结束还有</a>
+                    <a target="_blank"></a>
+                    <a target="_blank">更多活动 &gt; </a>
+                </div>
+                <div id="prbox">
+                    <div id="prbox1">
+                        <a target="_blank">活动价</a>
+                    </div>
+                    <div class="pricebox">
+                        <p>
+                            {{ init }}{{ price }}
+                            <!--价格 price-->
+                        </p>
+                    </div>
+                    <div id="rate">
+                        <a target="_blank">8.3折</a>
+                    </div>
+                    <div id="costbox">
+                        <a target="_blank">参考价：{{ init }}{{ cost }}</a>
+                        <a target="_blank">
+                            <!--参考价格 cost-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="waibao">
+
+                <a class="left" target="_blank">配送</a>
+
+
+                <a target="_blank">
+                    99元免基础运费（5kg内）
+                </a>
+
+            </div>
+            <div>
+                <div class="left">
+                    <a target="_blank">服务</a>
+                </div>
+                <div>
+                    <div>
+                        <a target="_blank">由</a>
+                        <a target="_blank">
+                            <!--发货方-->
+                        </a>
+                        <a target="_blank">提供发货和售后服务，预计1-2天送达</a>
+                    </div>
+                    <div id="olli">
+                        <ol>
+                            <li>不支持到店自提</li>
+                            <li>不支持7天无理由退货</li>
+                            <li>不支持货到付款</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 710px;height: 28px;padding: 15px 0;">
+                <div class="left">
+                    <a target="_blank">购买数量</a>
+                </div>
+                <div style="float: left;">
+                    <button style="float: left;width: 20px;height: 20px;">-</button>
+                    <input id="ini" type="text" style="display: block;width: 18px;height: 16px;float: left;" value="1">
+                    <button style="float: left;width: 20px;height: 20px;">+</button>
+                </div>
+
+                <a style="margin-left: 20px;float: left;" target="_blank">限购20件</a>
+
+            </div>
+            <div style="width: 710px;height: 48px;">
+                <div class="left">
+                    <!--空div-->
+                </div>
+                <div id="box-two">
+                    <div>立刻购买</div>
+                    <div>加入购物车</div>
+                    <div>
+                        <a target="_blank">收藏</a>
+                    </div>
+                </div>
+            </div>
+            <div style="width: 710px;height: 48px;">
+                <div>
+                    <!--空-->
+                </div>
+                <div>
+                    <a target="_blank">100%好评</a>
+                    <a target="_blank">
+                        <!--评价-->
+                    </a>
+                    <a href="" target="_blank">评价返积分</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="boxtj">
+    <div class="main">
+        <div>
+            <div id="tuijian">
+                <p>购买此商品的顾客也会购买：</p>
+            </div>
+            <div>
+                <ul id="tj">
+                    <li>
+                        <a href="shop.html?id=001" target="_blank"><img src="{% static 'images/ha/img1.jpg' %}"></a>
+                        <div class="namebox">
+                            <p>
+                                <!--name-->
+                            </p>
+                        </div>
+
+                        <div class="pricebox">
+                            <p>
+                                <!--价格-->
+                            </p>
+                        </div>
+
+                    </li>
+                    <li>
+                        <a href="shop.html?id=002" target="_blank"><img src="{% static 'images/ha/img2.jpg' %}"></a>
+                        <div class="namebox">
+                            <p>
+                                <!--name-->
+                            </p>
+                        </div>
+
+                        <div class="pricebox">
+                            <p>
+                                <!--价格-->
+                            </p>
+                        </div>
+
+                    </li>
+                    <li>
+                        <a href="shop.html?id=003" target="_blank"><img src="{% static 'images/ha/img3.jpg' %}"></a>
+                        <div class="namebox">
+                            <p>
+                                <!--name-->
+                            </p>
+                        </div>
+
+                        <div class="pricebox">
+                            <p>
+                                <!--价格-->
+                            </p>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="shop.html?id=004" target="_blank"><img src="{% static 'images/ha/img4.jpg' %}"></a>
+                        <div class="namebox">
+                            <p>
+                                <!--name-->
+                            </p>
+                        </div>
+
+                        <div class="pricebox">
+                            <p>
+                                <!--价格-->
+                            </p>
+                        </div>
+
+
+                    </li>
+                    <li>
+                        <a href="shop.html?id=005" target="_blank"><img src="{% static 'images/ha/img5.jpg' %}"></a>
+                        <div class="namebox">
+                            <p>
+                                <!--name-->
+                            </p>
+                        </div>
+
+                        <div class="pricebox">
+                            <p>
+                                <!--价格-->
+                            </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--底部-->
+
+<div id="bt">
+    <div class="main">
+        <dl>
+            <dt>新手入门</dt>
+            <dd><a href="" target="_blank">购物流程</a></dd>
+            <dd><a href="" target="_blank">会员介绍</a></dd>
+            <dd><a href="" target="_blank">常见问题</a></dd>
+            <dd><a href="" target="_blank">发票说明</a></dd>
+            <dd><a href="" target="_blank">联系客服</a></dd>
+        </dl>
+        <dl>
+            <dt>配送服务</dt>
+            <dd><a href="" target="_blank">配送范围及运费</a></dd>
+            <dd><a href="" target="_blank">配送进度查询</a></dd>
+            <dd><a href="" target="_blank">自提服务</a></dd>
+            <dd><a href="" target="_blank">商品验货与签收</a></dd>
+        </dl>
+        <dl>
+            <dt>支付方式</dt>
+            <dd><a href="" target="_blank">货到付款</a></dd>
+            <dd><a href="" target="_blank">在线支付</a></dd>
+        </dl>
+        <dl>
+            <dt>售后服务</dt>
+            <dd><a href="" target="_blank">退换货政策</a></dd>
+            <dd><a href="" target="_blank">退换货流程</a></dd>
+            <dd><a href="" target="_blank">退款说明</a></dd>
+        </dl>
+        <dl id="dl5">
+            <dt>商家支持</dt>
+            <dd><a href="" target="_blank">商家入驻</a></dd>
+            <dd><a href="" target="_blank">商家规则</a></dd>
+            <dd><a href="" target="_blank">商家常见问题</a></dd>
+        </dl>
+    </div>
+</div>
+<!--最底部-->
+<div class="main">
+    <div style="margin: 10px auto;width: 255px;">
+        <a href="" target="_blank">关于我们</a>
+        <a href="" target="_blank">联系我们</a>
+        <a href="" target="_blank">加盟合作</a>
+        <a href="" target="_blank">诚征英才</a>
+        <a href="" target="_blank">友情链接</a>
+    </div>
+    <div style="margin:10px auto;width: 625px;">
+        百联集团有限公司旗下 上海百联全渠道电子商务有限公司版权所有 | 客服电话：400-900-8800 | 沪ICP备15028847号
+    </div>
+    <div style="width: 348px;margin: 10px auto;">
+        <a href="" target="_blank">互联网药品信息服务资质证书编号：沪-（非营业性）-2016-0044</a>
+    </div>
+    <div style="margin: 10px auto;width: 342px;">
+        <a href="" target="_blank">沪公网安备 31010102002366号</a>
+        <a href="" target="_blank">网购大家评</a>
+        <a href="" target="_blank">上海工商</a>
+        <a href="" target="_blank">经营执照</a>
+    </div>
+</div>
+
+
+</body>
+</html>
