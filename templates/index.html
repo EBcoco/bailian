@@ -93,13 +93,14 @@
             <li><a href="">消息</a></li>
         </ul>
         <ul class="right-top">
-            <li><a href="html/login.html" class="iconfont"> 请登录</a>&nbsp;&nbsp;<a href="{% url 'bl:register' %}">注册</a></li>
+            <li><a href="{% url 'bl:login' %}" class="iconfont">{{ name |default:'请登录'}}</a>&nbsp;&nbsp;<a href="{% url 'bl:register' %}">注册</a></li>
             <li><a href="car.html">我的订单</a></li>
             <li><a href="">我的百联</a></li>
             <li><a href="">充值缴费</a></li>
             <li><a href="">客户服务</a></li>
             <li><a href="">掌上百联</a></li>
             <li><a href="car.html" target="_blank">购物车</a></li>
+            <li><a href="{% url 'bl:logout' %}">登出</a></li>
         </ul>
     </div>
 </div>

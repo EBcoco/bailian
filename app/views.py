@@ -95,3 +95,35 @@ def checkemail(request):
         return JsonResponse({'msg': '账号已被占用!', 'status': 0})
     else:
         return JsonResponse({'msg': '账号是可以使用!', 'status': 1})
+
+
+def login(request):
+    if request.method == 'GET':
+        return render(request, 'login.html')
+    elif request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        # print(generate_password(password))
+
+        try:
+            # 不存在，会抛出异常
+            # 多个时，会抛出异常　【email是唯一约束】
+            user = User.objects.get(email=email)
+            if user.password == generate_password(password):
+                user.token = generate_token()
+                user.save()
+                request.session['token'] = user.token
+                return redirect('bl:index')
+            else:
+                return render(request, 'login.html', context={'p_err': '密码错误'})
+        except:
+            return render(request, 'login.html', context={'u_err': '账号不存在'})
+
+
+def logout(request):
+    request.session.flush()
+    return redirect('bl:index')
+
+
+def car(request):
+    return render(request,'car.html')

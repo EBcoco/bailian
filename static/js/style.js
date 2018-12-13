@@ -2,26 +2,26 @@
 $(function(){
 	//搜索框的css
 	
-	var param = location.search.substring(1);
-				var pname = getParams(param, "name");
-				if(pname){
-					$(".right-top").find("a").eq(0).html("您好，" +pname).removeAttr("href");
-					$(".right-top").find("a").eq(1).remove();
-				}
-				else{
-					$(".right-top").find("a").eq(0).html("&#xe601;  请登录")
-				}
-				function getParams(str, name){
-					var arr = str.split("&");
-					for (var i=0; i<arr.length; i++) {
-						var str1 = arr[i]; // id=1002 
-						var arr1 = str1.split("=");
-						if (arr1[0] == name) {
-							return arr1[1];
-						}
-					}
-					return ""; 
-				}
+	// var param = location.search.substring(1);
+	// 			var pname = getParams(param, "name");
+	// 			if(pname){
+	// 				$(".right-top").find("a").eq(0).html("您好，" +pname).removeAttr("href");
+	// 				$(".right-top").find("a").eq(1).remove();
+	// 			}
+	// 			else{
+	// 				$(".right-top").find("a").eq(0).html("&#xe601;  请登录")
+	// 			}
+	// 			function getParams(str, name){
+	// 				var arr = str.split("&");
+	// 				for (var i=0; i<arr.length; i++) {
+	// 					var str1 = arr[i]; // id=1002
+	// 					var arr1 = str1.split("=");
+	// 					if (arr1[0] == name) {
+	// 						return arr1[1];
+	// 					}
+	// 				}
+	// 				return "";
+	// 			}
 	
 	
 	

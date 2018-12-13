@@ -1,51 +1,51 @@
-//
-$(function(){
-//	var namer =  $.cookie("usename");
-//	var pass  = $.cookie("password");
-	
-	
-	
-	$("#box4").click(function(){
-//		var usename = $("#box1").find("input").get(0).value;
-//		var pwd = $("#box2").find("input").get(0).value;
-		
-		var xhr = new XMLHttpRequest();
-            xhr.open("post", "http://localhost/e/js/04_login.php", true);
-            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            var str = "username=" + $("#box1").find("input").get(0).value   + "&password=" + $("#box2").find("input").get(0).value;
-            xhr.send(str);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState==4 && xhr.status==200) {
-                    console.log(xhr.responseText);
-                   	var obj = JSON.parse(xhr.responseText);
-                   	
-                   	if(obj.status == 1){
-                   		alert("登录成功");
-                   		location.href = "../index.html?name=" + $("#box1").find("input").get(0).value;
-                   	}
-                   	else {
-                   		alert("密码错误")
-                   	}
-                }
+$(function () {
 
-            }
-		
-		
-		
-	})
-	
-	
+    $('#email input').blur(function () {
+        if ($(this).val() == '') return
 
-	
-	
-	
-	
-	
+        var reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+
+        if (reg.test($(this).val())) {
+            $('#email').removeClass('has-error').addClass('has-success')
+            $('#email span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+            b_email = true
+        } else {
+            $('#email').removeClass('has-success').addClass('has-error')
+            $('#email span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+            $('#email p').html('邮箱格式错误')
+            b_email = false
+        }
+
+        checkSub()
+    })
+
+    // 密码验证
+    var b_password = false
+    $('#password input').blur(function () {
+        if ($(this).val() == '') return
+        var reg = /^[a-zA-Z\d_]{6,20}$/
+        if (reg.test($(this).val())) {   // 符合
+            $('#password').removeClass('has-error').addClass('has-success')
+            $('#password span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+            b_password = true
+        } else {   // 不符合
+            $('#password').removeClass('has-success').addClass('has-error')
+            $('#password span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+            $('#password p').html('格式错误，密码为6~20位')
+            b_password = false
+        }
+
+        checkSub()
+    })
+
+
+    function checkSub() {
+        if (b_email && b_password) {
+            $('#subButton').removeAttr('disabled')
+        } else {
+            $('#subButton').attr('disabled', 'disabled')
+        }
+    }
+
+
 })
-
-	
-	
-	
-	
-	
-
