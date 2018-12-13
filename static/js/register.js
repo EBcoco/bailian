@@ -1,257 +1,132 @@
-$(function(){
-	//判断用户名
-	var flag1 = false;
-	var flag2 = false;
-	var flag3 = false;
-	var flag4 = false;
-	var flag5 = false;
-	var flag6 = false;
-	var flag7 = false;
-	var flag8 = false;
-	
-		$("#inpt-show1").keyup(function(){
-			var reg = /^[a-zA-Z0-9]{6,20}$/;
-			var reg1 = /[a-zA-Z]/;
-			var str = $(this).get(0).value;
-			if(reg.test(str) && reg1.test(str)){
-				$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-				$(this).parent().next("span").find("a").css("display","none");
-				flag1 = true;
-			}
-			else{
-				if(str.length <6 || str.length>20){
-					$(this).parent().next("span").find("a").html("用户名长度只能在6-20位字符之间").css("display","inline-block");
-				}
-				else{
-					$(this).parent().next("span").find("a").html("用户名只能由字母或字母和数字组合").css("display","inline-block");
-				}
-				$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-				flag1 = false;
-			}
-		})
-		$("#inpt-show1").blur(function(){
-			$(this).parent().next("span").css("display","inline-block");
-			var reg = /^[a-zA-Z0-9]{6,20}$/;
-			var reg1 = /[a-zA-Z]/;
-			var str = $(this).get(0).value;
-			if(reg.test(str) && reg1.test(str)){
-				$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-				$(this).parent().next("span").find("a").css("display","none");
-			}
-			else{
-				$(this).parent().next("span").find("img").get(0).src = "../images/yn.png";
-				$(this).parent().next("span").find("a").css("display","inline-block");
-			}
-		})
-	//判断密码
-	$("#inpt-show2").keyup(function(){
-		var str = $(this).val();
-		$(this).parent().next("span").css("display","inline-block");
-		$(this).parent().next("span").find("ul").css("display","inline-block")
-		if(str.length >= 8 && str.length <= 20){
-			if(str.length<12){
-				$(this).parent().next("span").find("li").eq(0).addClass("backcolor").siblings("li").removeClass("backcolor");
-			}
-			else if(str.length<16 && str.length>=12){
-				$(this).parent().next("span").find("li").eq(1).addClass("backcolor").siblings("li").removeClass("backcolor");
-			}
-			else if(str.length>=16){
-				$(this).parent().next("span").find("li").eq(2).addClass("backcolor").siblings("li").removeClass("backcolor");
-			}
-			$(this).parent().next("span").find("img").get(0).src = "../images/yn.png";
-			flag2 = true;
-		}
-		else{
-			flag2 = false;
-		}
-	})
-	$("#inpt-show2").blur(function(){
-		$(this).parent().next("span").css("display","inline-block");
-		var str = $(this).val();
-		if(str.length<=0){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yn.png";
-			$(this).parent().next("span").find("a").html("请输入密码");
-			$(this).parent().next("span").find("ul").css("display","none");
-		}
-		else if(str.length >= 8 && str.length <= 20){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html("  ")
-			$(this).parent().next("span").find("ul").css("display","none")
-		}
-	})
-	//确认密码
-	$("#inpt-show3").keyup(function(){
-		var str = $(this).val();
-		var str1 = $("#inpt-show2").val();
-		$(this).parent().next("span").css("display","inline-block");
-		if(str == str1){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html("  ");
-			flag3 = true;
-		}
-		else{
-			$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-			$(this).parent().next("span").find("a").html("确认密码与登录密码不一致");
-			flag3 = false;
-		}
-	})
-	$("#inpt-show3").blur(function(){
-		var str = $(this).val();
-		var str1 = $("#inpt-show2").val();
-		$(this).parent().next("span").css("display","inline-block");
-		if(str == str1 && str.length>=8 ){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html("  ");
-		}
-		else{
-			$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-			$(this).parent().next("span").find("a").html("确认密码与登录密码不一致");
-		}
-	})
-	//验证手机号
-	$("#inpt-show4").keyup(function(){
-		var str = $(this).val();
-		$(this).parent().next("span").css("display","inline-block");
-		var reg = /^1[34578]\d{9}$/;
-		if(reg.test(str)){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html(" ");
-			flag4 = true;
-		}
-		else{
-			$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-			$(this).parent().next("span").find("a").html("手机号格式错误");
-			flag4 = false;
-		}
-	})
-	$("#inpt-show4").blur(function(){
-		var str = $(this).val();
-		$(this).parent().next("span").css("display","inline-block");
-		var reg = /^1[34578]\d{9}$/;
-		if(!reg.test(str)){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yn.png";
-			$(this).parent().next("span").find("a").html("请输入手机号");
-		}
-	})
-	//验证码
-	var verifyCode = new GVerify("v_container");
-	$("#inpt-show5").blur(function(){
-		$(this).parent().next("span").css("display","inline-block");
-		var res = verifyCode.validate(document.getElementById("inpt-show5").value);
-	
-		console.log(res);
-		if(res){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html(" ");
-			flag5 = true;
-		}
-		else{
-			$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-			$(this).parent().next("span").find("a").html("验证码不正确");
-			flag5 = false;
-		}
-	})
-	$("#inpt-show6").keyup(function(){
-		var str = $(this).val();
-		var str1 = $(this).next("input").get(0).name;
-		$(this).parent().next("span").css("display","inline-block");
-		if(str == str1){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html(" ");
-			flag6 = true;
-		}
-		else{
-			$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-			$(this).parent().next("span").find("a").html("验证码不正确");
-			flag6 = false;
-		}
-	})
-	$("#inpt-show6").next("input").click(function(){
-		$(this).get(0).name = 1000 + parseInt(Math.random()*899);
-		var str = $(this).get(0).name;
-		var timer = setTimeout(function(){
-			alert("【百联e城】:您的注册验证码是" + str + "。请妥善保管好您的验证码，切勿泄露他人。")
-		},3000);
-	})
-	//邮箱验证
-	$("#inpt-show7").keyup(function(){
-		$(this).parent().next("span").css("display","inline-block");
-		var reg = /^[A-Za-z0-9\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
-		var str = $(this).val();
-		if(reg.test(str)){
-			$(this).parent().next("span").find("img").get(0).src = "../images/yes.png";
-			$(this).parent().next("span").find("a").html(" ");
-			flag7 = true;
-		}
-		else{
-			$(this).parent().next("span").find("img").get(0).src = "../images/no.png";
-			$(this).parent().next("span").find("a").html("邮箱格式不正确");
-			flag7 = false;
-		}
-	})
-	$("#check").click(function(){
-		if($("#check").is(':checked')){
-			flag8 = true;
-		}
-		else{
-			flag8 = false;
-		}
-		console.log(flag8);
-	})
-	
-	
+$(function () {
+    // $('.register').width(innerWidth)
 
-	
-	
-	$("#inpt-show8").click(function(e){
-		e.preventDefault();
-		
-		var ainpt = $("#inpt-show1").get(0).value;
-		var binpt = $("#inpt-show2").get(0).value;
-		var cinpt = $("#inpt-show4").get(0).value;
-		console.log(ainpt + " + " + binpt + " + " + cinpt);
-		var xhr = new XMLHttpRequest();
-                
-                xhr.open("post", "http://localhost/e/js/02_register.php", true);
-                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-                var str = "username="+  ainpt  + "&password=" + binpt + "&phone=" + cinpt;
-                //console.log(str);
-                xhr.send(str);
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState==4 && xhr.status==200) {
-                        console.log(xhr.responseText);
-                        //json解析
-                        //如果注册成功则进入登录页面
-                        //如果失败则弹出提示信息
-                        var obj = JSON.parse(xhr.responseText);
-                   	
-                   		if(obj.status == 1){
-	                   		alert("注册成功");
-	                   		location.href = "login.html";
-	                   	}
-                   		
-                    }
+    $('#name input').blur(function () {
+        if ($(this).val() == '') return
+
+        // console.log(123)
+        if ($(this).val().length >= 6 && $(this).val().length <= 20) { // 符合要求
+            $.get('/bailian/checkname/', {'name': $(this).val()}, function (response) {
+                // console.log(123)
+                // console.log(response)
+                $('#name .text').html(response.msg)
+                if (response.status) {   // 可用
+                    $('#name').removeClass('has-error').addClass('has-success')
+                    $('#name span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+                    $('#name .text').removeClass('red').addClass('green')
+                } else {    // 不可用
+                    $('#name').removeClass('has-success').addClass('has-error')
+                    $('#name span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+                    $('#name .text').removeClass('green').addClass('red')
                 }
-                
-                
-                
-//		if(flag1 && flag2 && flag3 && flag4 && flag5 && flag6 && flag7 && flag8){
-////			$.cookie("usename", $("#inpt-show1").get(0).value, {expires:10, path:"/"});
-////			$.cookie("password", $("#inpt-show2").get(0).value, {expires:10, path:"/"});
-//			location.href = "login.html";
-//		}
-//		else{
-//			alert("您的填写信息有误！");
-//		}
-	})
-	
-	
-	//
+            })
+        } else {    // 不符合要求
+            $('#name').removeClass('has-success').addClass('has-error')
+            $('#name span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
+    })
 
 
+    // 密码验证
+    $('#password input').blur(function () {
+        if ($(this).val() == '') return
+        var reg = /^[a-zA-Z\d_]{6,12}$/
+        if (reg.test($(this).val())) {   // 符合
+            $('#password p').html('格式:密码格式正确').removeClass('red').removeClass('help').addClass('green')
+            $('#password').removeClass('has-error').addClass('has-success')
+            $('#password span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
 
-	
-	
-	///mysql
+            // $('#password span').show()
+        } else {   // 不符合
+            $('#password p').html('6-12位，数字、字母、下划线').removeClass('help').addClass('red')
+            $('#password').addClass('has-error').removeClass('has-success')
+            $('#password span').addClass('glyphicon-remove').removeClass('glyphicon-ok')
 
-})	
+            // $('#password span').hide()
+        }
+    })
+// 第二次密码输入验证
+    $('#password-d input').blur(function () {
+        if ($(this).val() == '') return
+        var f_val = $('#password input').val()
+        var d_val = $(this).val()
+
+        if (f_val == d_val) {   // 符合
+            $('#password-d p').html('格式：两次输入相同').removeClass('red').removeClass('help').addClass('green')
+            $('#password-d').removeClass('has-error').addClass('has-success')
+            $('#password-d span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+        } else {   // 不符合
+            $('#password-d p').html('两次密码输入不一致').removeClass('help').addClass('red')
+            $('#password-d').addClass('has-error').removeClass('has-success')
+            $('#password-d span').addClass('glyphicon-remove').removeClass('glyphicon-ok')
+        }
+    })
+
+
+// 手机号验证
+    $('#phone input').blur(function () {
+        if ($(this).val() == '') return
+
+        var reg = /^1[34578]\d{9}$/
+
+        if (reg.test($(this).val())) { // 符合要求
+            $('#phone').removeClass('has-error').addClass('has-success')
+            $('#phone span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+            $('#phone p').html('格式：输入正确').removeClass('red').addClass('green')
+
+        } else {    // 不符合要求
+            $('#phone').removeClass('has-success').addClass('has-error')
+            $('#phone span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+            $('#phone p').html('格式输入错误').removeClass('green').addClass('red')
+
+        }
+    })
+    // 邮箱验证
+    $('#email input').blur(function () {
+        if ($(this).val() == '') return
+
+        var reg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+        if (reg.test($(this).val())) { // 符合要求
+            // 发起ajax请求　　>>> 　邮箱是否可用　？？？
+            // jQuery.post( url [, data ] [, success(data, textStatus, jqXHR) ] [, dataType ] )
+            console.log(123)
+
+            $.get('/bailian/checkemail/', {'email': $(this).val()}, function (response) {
+                console.log(response)
+                $('#email .text').html(response.msg)
+                if (response.status) {   // 可用
+                    $('#email').removeClass('has-error').addClass('has-success')
+                    $('#email span').removeClass('glyphicon-remove').addClass('glyphicon-ok')
+                    $('#email .text').removeClass('red').addClass('green')
+                } else {    // 不可用
+                    $('#email').removeClass('has-success').addClass('has-error')
+                    $('#email span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+                    $('#email .text').removeClass('green').addClass('red')
+                }
+            })
+
+        } else {    // 不符合要求
+            $('#email').removeClass('has-success').addClass('has-error')
+            $('#email span').removeClass('glyphicon-ok').addClass('glyphicon-remove')
+        }
+    })
+
+    // 为了校验数据格式是否正确，所以点击注册时，触发点击事件
+    // 在点击事件中，进行数据校验
+    // 校验没问题，即发起ajax请求【注册】
+    $('#subButton').click(function () {
+        var isRegister = true   // 默认可以注册
+
+        $('input').each(function () {
+            if ($(this).val() == '') {
+                isRegister = false
+            }
+        })
+
+        console.log(isRegister)
+
+        if (isRegister) {
+            $('#register-view').submit()
+        }
+    })
+})
