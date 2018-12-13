@@ -126,4 +126,13 @@ def logout(request):
 
 
 def car(request):
-    return render(request,'car.html')
+    token=request.session.get('token')
+    data={}
+
+    if token:
+        user=User.objects.get(token=token)
+    else:
+        data['msg']='请登录后操作'
+        data['status']=-1
+        return JsonResponse(data)
+

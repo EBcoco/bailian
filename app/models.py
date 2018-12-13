@@ -29,3 +29,8 @@ class User(models.Model):
     phone = models.CharField(max_length=20)
     # 令牌
     token = models.CharField(max_length=256)
+
+class car(models.Model):
+    user=models.ForeignKey(User)
+    good=models.ForeignKey(Goods)
+    number=models.IntegerField()
