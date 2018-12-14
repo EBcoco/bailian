@@ -261,7 +261,7 @@
             <li><a href="">充值缴费</a></li>
             <li><a href="">客户服务</a></li>
             <li><a href="">掌上百联</a></li>
-            <li><a href="{% bl:car %}">购物车</a></li>
+            <li><a href="{% url 'bl:car' %}">购物车</a></li>
         </ul>
     </div>
 </div>
@@ -270,7 +270,7 @@
     <div class="main">
         <div id="hang">
             <div id="hangimg">
-                <a href="{% url 'bl:index' %}"><img src="{% static 'images/banner.jpg'%}"/></a>
+                <a href="{% url 'bl:index' %}"><img src="{% static 'images/banner.jpg' %}"/></a>
             </div>
             <div id="hanga">
                 <a>购物车</a>
@@ -331,6 +331,28 @@
     <!--动态创建节点-->
     <div>
         <ul id="list">
+            {% for good in car %}
+                <li class="shopshow">
+                    <div class="theselect">
+                        <input type="checkbox" checked="checked"/>
+                    </div>
+                    <div class="gname">
+                        <a href="">{{ good.good.name }}</a>
+                    </div>
+                    <div class="gprice">
+                        <a>{{ good.good.price }}</a>
+                    </div>
+                    <div class="gnum">
+                        <a>{{ good.number }}</a>
+                    </div>
+                    <div class="gsum">
+                        <a>123</a>
+                    </div>
+                    <div class="shopdel">
+                        <a>删除</a>
+                    </div>
+                </li>
+            {% endfor %}
 
         </ul>
     </div>

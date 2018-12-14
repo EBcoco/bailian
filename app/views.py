@@ -129,10 +129,16 @@ def logout(request):
 
 def car(request):
     token=request.session.get('token')
-    data={}
+
 
     if token:
-        return render(request,'car.html')
+        user=User.objects.get(token=token)
+        car=Car.objects.filter(user=user).exclude(number=0)
+        data={
+            'car':car
+        }
+
+        return render(request,'car.html',context=data)
     else:
         return redirect('bl:login')
 
@@ -157,7 +163,7 @@ def addcar(request):
             cart.number = cart.number + int(number)
             cart.save()
         else:  # 不存在
-            cart = carts.first()
+            cart = Car()
             cart.user = user
             cart.good = good
             cart.number = int(number)
