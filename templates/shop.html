@@ -28,7 +28,7 @@
             <li><a href="" target="_blank">充值缴费</a></li>
             <li><a href="" target="_blank">客户服务</a></li>
             <li><a href="" target="_blank">掌上百联</a></li>
-            <li><a href="car.html" target="_blank">购物车</a></li>
+            <li><a href="{% url 'bl:car' %}" target="_blank">购物车</a></li>
         </ul>
     </div>
 </div>
@@ -185,9 +185,9 @@
                     <a target="_blank">购买数量</a>
                 </div>
                 <div style="float: left;">
-                    <button style="float: left;width: 20px;height: 20px;">-</button>
+                    <button style="float: left;width: 20px;height: 38px;">-</button>
                     <input id="ini" type="text" style="display: block;width: 18px;height: 16px;float: left;" value="1">
-                    <button style="float: left;width: 20px;height: 20px;">+</button>
+                    <button style="float: left;width: 20px;height: 38px;">+</button>
                 </div>
 
                 <a style="margin-left: 20px;float: left;" target="_blank">限购20件</a>
@@ -199,7 +199,7 @@
                 </div>
                 <div id="box-two">
                     <div>立刻购买</div>
-                    <div>加入购物车</div>
+                    <div goodid="{{ goodid }}">加入购物车</div>
                     <div>
                         <a target="_blank">收藏</a>
                     </div>

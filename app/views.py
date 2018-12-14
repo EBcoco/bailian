@@ -6,7 +6,7 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
-from app.models import Goods, User
+from app.models import Goods, User, Car
 
 
 def index(request):
@@ -32,7 +32,9 @@ def shop(request, id):
     cost = good.cost
     price = good.price
     init = good.init
+    goodid=good.id
     data = {
+        'goodid':goodid,
         'img1': img1,
         'img2': img2,
         'img3': img3,
@@ -130,9 +132,41 @@ def car(request):
     data={}
 
     if token:
-        user=User.objects.get(token=token)
+        return render(request,'car.html')
     else:
-        data['msg']='请登录后操作'
-        data['status']=-1
-        return JsonResponse(data)
+        return redirect('bl:login')
 
+
+def addcar(request):
+    token = request.session.get('token')
+    goodid=request.GET.get('goodid')
+    number=request.GET.get('number')
+    print(goodid)
+    if token:
+        user = User.objects.get(token=token)
+        good = Goods.objects.get(pk=goodid)
+        # cart = Car()
+        # cart.user=user
+        # cart.good=good
+        # cart.number=int(number)
+        # cart.save()
+        carts=Car.objects.filter(user=user).filter(good=good)
+
+        if carts.exists():  # 存在
+            cart = carts.first()
+            cart.number = cart.number + int(number)
+            cart.save()
+        else:  # 不存在
+            cart = carts.first()
+            cart.user = user
+            cart.good = good
+            cart.number = int(number)
+            cart.save()
+
+        return JsonResponse({'status': 1})
+
+    else:
+        data = {}
+        data['msg'] = '请登录后操作!'
+        data['status'] = -1
+        return JsonResponse(data)

@@ -11,4 +11,5 @@ urlpatterns=[
     url(r"^checkemail/$",views.checkemail,name='checkemail'),
     url(r'^logout/$', views.logout, name='logout'),
     url(r'^car/$', views.car, name='car'),
+    url(r'^addcar/$', views.addcar, name='addcar'),
 ]
